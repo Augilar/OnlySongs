@@ -5,6 +5,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import requests
 import json
 import os
+import time
 
 scope = ["user-library-read","user-read-currently-playing", "app-remote-control"]
 
@@ -23,23 +24,27 @@ curr_song = ""
 
 while True:
 
-    current_song = sp.currently_playing()
+    try:
+        current_song = sp.currently_playing()
 
-    if(not muted and current_song["item"] is not None):
-        curr_song = current_song["item"]["name"]
-    if(not muted and prev_song != curr_song):
-        prev_song = curr_song
-        print(current_song["currently_playing_type"] + " : " + current_song["item"]["name"] + " : " + current_song["item"]["artists"][0]["name"])
+        if(not muted and current_song["item"] is not None):
+            curr_song = current_song["item"]["name"]
+        if(not muted and prev_song != curr_song):
+            prev_song = curr_song
+            print(current_song["currently_playing_type"] + " : " + current_song["item"]["name"] + " : " + current_song["item"]["artists"][0]["name"])
+            
+
+        if((muted is False) and (current_song["currently_playing_type"] == "ad")) :
+            print(current_song["currently_playing_type"])
+            os.system("bash mute.sh")
+            muted = True
+
+        if(muted and (current_song["currently_playing_type"] == "track")):
+            os.system("bash mute.sh")
+            muted = False
         
-
-    if((muted is False) and (current_song["currently_playing_type"] == "ad")) :
-        print(current_song["currently_playing_type"])
-        os.system("bash mute.sh")
-        muted = True
-
-    if(muted and (current_song["currently_playing_type"] == "track")):
-        os.system("bash mute.sh")
-        muted = False
+    except:
+        time.sleep(2)
 
 
 
