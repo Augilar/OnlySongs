@@ -15,7 +15,7 @@ pactl list sink-inputs |while read line; do \
         app_name_check=$(echo "$line" \
             |sed -rn 's/application.name = "([^"]*)"/\1/p')
         if [ "$app_name_check" = "$app_name" ]; then
-            echo "$current_sink_num" "$app_name_check"
+            #echo "$current_sink_num" "$app_name_check"
 
             pactl set-sink-input-mute "$current_sink_num" toggle
         fi
