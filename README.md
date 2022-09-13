@@ -1,7 +1,14 @@
-# OnlySongs
-Hear songs not ads on spotify.
-Mutes spotify whenever an ad comes.
+<!---
+<h1 align="center"> OnlySongs </h1>
+--->
+<p align = "center">
+  <img src="./onlySongs-logos_transparent.png" alt="OnlySongs logo" title="OnlySongs"  height="350" style="display: block; margin: 0 auto" />
+</p>
 
+<p> <b>
+Hear songs not ads on spotify.
+Mutes spotify whenever an ad comes. </b>
+</p>
 In Ubuntu
 
 How to use it
